@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, DateTime, ForeignKey, String, Float
+from sqlalchemy import Column, Boolean, Integer, DateTime, ForeignKey, String, Float
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -10,17 +10,18 @@ class User(Base):
     trade_link = Column(String)
     email = Column(String)
     password = Column(String)
-    profile_photo = Column(String)
+    balance = Column(Float, default=0)
     register_date = Column(DateTime)
 
 
 class Skin(Base):
     __tablename__ = 'skins'
     skin_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    user_id = Column(Integer, ForeignKey('users.user_id'))
     skin_name = Column(String)
     skin_date = Column(DateTime)
     flot = Column(Float)
+    cost_skin = Column(Float, default=True)
     exterior = Column(String)
     user_fk = relationship(User, lazy='subquery')
 
@@ -38,7 +39,19 @@ class Trade(Base):
     trade_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.user_id'))
     skin_id = Column(Integer, ForeignKey('skins.skin_id'))
-    user_fk = relationship(User, lazy='subquery')
-    skin_fk = relationship(Skin, lazy='subquery')
+    skin_from_id = Column(Integer, ForeignKey('skins.skin_id'))
+    skin_to_id = Column(Integer, ForeignKey('skins.skin_id'))
+    user_fk = relationship(User, foreign_keys=[user_id], lazy='subquery')
+    skin_fk = relationship(Skin, foreign_keys=[skin_id], lazy='subquery')
+
+    user_from = Column(Integer, ForeignKey('users.user_id'))
+    user_to = Column(Integer, ForeignKey('users.user_id'))
+
+    balance = Column(Float, ForeignKey('users.balance'))
+    status = Column(Boolean, default=True)
+    skin_from_fk = relationship(Skin, foreign_keys=[skin_from_id], lazy='subquery')
+    skin_to_fk = relationship(Skin, foreign_keys=[skin_to_id], lazy='subquery')
+    trade_date = Column(DateTime)
+
 
 

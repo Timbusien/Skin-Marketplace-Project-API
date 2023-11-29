@@ -3,11 +3,13 @@ from database.models import User
 from database import get_database
 
 
-def register_user_my_db(nick, trade_link, email, password):
+def register_user_my_db(nick, trade_link, email, balance, password):
     my_db = next(get_database())
+    
     new_user = User(nick=nick,
                     trade_link=trade_link,
                     email=email,
+                    balance=balance,
                     password=password,
                     register_date=datetime.now())
     my_db.add(new_user)
@@ -16,7 +18,7 @@ def register_user_my_db(nick, trade_link, email, password):
     return 'SUCCESS, user have been registered'
 
 
-def login_user_db(email, password):
+def login_user_my_db(email, password):
     my_db = next(get_database())
     check = my_db.query(User).filter_by(email=email).first()
 
