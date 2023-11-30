@@ -2,8 +2,8 @@ from pydantic import BaseModel
 
 
 class CreateTradeValidator(BaseModel):
-    user_to: int
-    user_from: int
+    skin_to_id: int
+    skin_from_id: int
     cost_skin: int
     skin_id: int
 

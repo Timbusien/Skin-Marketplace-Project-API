@@ -15,7 +15,7 @@ def get_exact_user_skin_name_my_db(user_id, my_db):
     return exact_skin_name
 
 
-def get_user_skin_trade(skin_id, skin_from_id, skin_to_id, user_to, user_from, balance, user_id, cost_skin):
+def get_user_skin_trade(status, skin_id, skin_from_id, skin_to_id, user_to, user_from, balance, user_id, cost_skin):
     my_db = next(get_database())
     check_skin_to = validate_skin(skin_to_id, my_db)
     check_skin_from = validate_skin(skin_from_id, my_db)
@@ -28,7 +28,7 @@ def get_user_skin_trade(skin_id, skin_from_id, skin_to_id, user_to, user_from, b
                 user_to.balance -= user_from.balance
                 new_trade = Trade(skin_from_id=check_skin_from.skin_id, skin_to_id=check_skin_to.skin_id,
                                   cost_skin=cost_skin, skin_id=skin_id, balance=balance, user_to=user_to,
-                                  user_from=user_from, user_id=user_id, trade_date=datetime.now())
+                                  user_from=user_from, status=status, trade_date=datetime.now())
                 my_db.add(new_trade)
                 my_db.commit()
             else:
