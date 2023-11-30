@@ -79,3 +79,4 @@ async def add_skin_photo(skin_id: int = Body(),
 
     return {'message': result}
 
+

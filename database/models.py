@@ -20,7 +20,7 @@ class Skin(Base):
     user_id = Column(Integer, ForeignKey('users.user_id'))
     skin_name = Column(String)
     flot = Column(Float)
-    skin_photo = Column(String)
+    # skin_photo = Column(String)
     cost_skin = Column(Integer, default=0)
     exterior = Column(String)
     user_fk = relationship(User, lazy='subquery')
@@ -43,7 +43,7 @@ class Trade(Base):
     skin_to_id = Column(Integer, ForeignKey('skins.skin_id'))
     user_fk = relationship(User, foreign_keys=[user_id], lazy='subquery')
     skin_fk = relationship(Skin, foreign_keys=[skin_id], lazy='subquery')
-
+    cost_skin = Column(Integer, ForeignKey('skins.cost_skin'))
     user_from = Column(Integer, ForeignKey('users.user_id'))
     user_to = Column(Integer, ForeignKey('users.user_id'))
 
