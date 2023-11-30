@@ -9,11 +9,10 @@ class CreateTradeValidator(BaseModel):
 
 
 class CancelTradeValidator(BaseModel):
-    skin_to: int
-    skin_from: int
-    skin_cost: int
-    status: bool
-    skin_name: str
+    skin_to_id: int
+    skin_from_id: int
+    cost_skin: int
+    skin_id: int
     trade_id: int
 
 
