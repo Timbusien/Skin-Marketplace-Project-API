@@ -3,10 +3,11 @@ from datetime import datetime
 from database import get_database
 
 
-def add_skin_my_db(skin_name, flot, exterior):
+def add_skin_my_db(skin_name, flot, exterior, cost_skin):
     my_db = next(get_database())
     new_skin = Skin(skin_name=skin_name,
                     flot=flot,
+                    cost_skin=cost_skin,
                     exterior=exterior,
                     skin_date=datetime.now())
 
@@ -58,16 +59,16 @@ def delete_skin_my_db(skin_id):
     return 'Skin deleted successfully'
 
 
-def get_exact_user_skin(user_id):
+def get_exact_user_skin_my_db(user_id):
     my_db = next(get_database())
     exact_user_skin = my_db.query(Skin).filter_by(user_id=user_id).first()
 
     return exact_user_skin
 
 
-def get_exact_skin(user_id):
+def get_exact_skin(skin_id):
     my_db = next(get_database())
-    exact_skin = my_db.query(Skin).filter_by(user_id=user_id).first()
+    exact_skin = my_db.query(Skin).filter_by(skin_id=skin_id).first()
 
     if exact_skin:
         return exact_skin
@@ -75,4 +76,8 @@ def get_exact_skin(user_id):
         return False
 
 
+def get_all_skins():
+    my_db = next(get_database())
+    all_skins = my_db.query(Skin).all()
 
+    return all_skins

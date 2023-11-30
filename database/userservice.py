@@ -18,6 +18,17 @@ def register_user_my_db(nick, trade_link, email, balance, password):
     return 'SUCCESS, user have been registered'
 
 
+def check_user_my_db(email):
+    my_db = next(get_database())
+
+    check = my_db.query(User).filter_by(email=email).first()
+
+    if check:
+        return check
+    else:
+        return False
+
+
 def login_user_my_db(email, password):
     my_db = next(get_database())
     check = my_db.query(User).filter_by(email=email).first()
@@ -88,3 +99,18 @@ def get_exact_user(user_id):
     user_inventory = my_db.query(User).filter_by(user_id=user_id).first()
 
     return user_inventory
+
+
+def delete_user_my_db(user_id):
+    my_db = next(get_database())
+    delete_user = my_db.query(User).filter_by(user_id=user_id).first()
+
+    if delete_user:
+        my_db.delete(delete_user)
+        my_db.commit()
+
+        return 'User deleted Successfully'
+    else:
+        return 'User not exist'
+
+

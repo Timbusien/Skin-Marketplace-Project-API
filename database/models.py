@@ -8,9 +8,9 @@ class User(Base):
     user_id = Column(Integer, primary_key=True, autoincrement=True)
     nick = Column(String)
     trade_link = Column(String)
-    email = Column(String)
+    email = Column(String, unique=True, nullable=False)
+    balance = Column(Integer, default=0)
     password = Column(String)
-    balance = Column(Float, default=0)
     register_date = Column(DateTime)
 
 
@@ -19,18 +19,18 @@ class Skin(Base):
     skin_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.user_id'))
     skin_name = Column(String)
-    skin_date = Column(DateTime)
     flot = Column(Float)
-    cost_skin = Column(Float, default=True)
+    skin_photo = Column(String)
+    cost_skin = Column(Integer, default=0)
     exterior = Column(String)
     user_fk = relationship(User, lazy='subquery')
+    skin_date = Column(DateTime)
 
 
 class SkinPhoto(Base):
     __tablename__ = 'skins_photos'
     photo_id = Column(Integer, primary_key=True, autoincrement=True)
     skin_id = Column(Integer, ForeignKey('skins.skin_id'))
-    skin_photo_fk = relationship(Skin, lazy='subquery')
     skin_fk = relationship(Skin, lazy='subquery')
 
 

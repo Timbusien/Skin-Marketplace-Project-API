@@ -46,10 +46,10 @@ def get_skin_trade_my_db(skin_to_id):
     return trade
 
 
-def cancel_user_skin_trade(skin_from_id, skin_to_id, user_from, user_id, trade_id):
+def cancel_user_skin_trade(skin_from, skin_to, user_from, user_id, trade_id):
     my_db = next(get_database())
-    check_skin_to = validate_skin(skin_to_id, my_db)
-    check_skin_from = validate_skin(skin_from_id, my_db)
+    check_skin_to = validate_skin(skin_to, my_db)
+    check_skin_from = validate_skin(skin_from, my_db)
     check_user_to = get_exact_user_skin_name_my_db(user_id, my_db)
     check_user_from = get_exact_user_skin_name_my_db(user_id, my_db)
 

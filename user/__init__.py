@@ -6,7 +6,7 @@ class RegisterUserValidator(BaseModel):
     trade_link: str
     email: str
     password: str
-    balance: float
+    balance: int
 
 
 class LoginUserValidator(BaseModel):
