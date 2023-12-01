@@ -23,8 +23,8 @@ class Skin(Base):
     # skin_photo = Column(String)
     cost_skin = Column(Integer, default=0)
     exterior = Column(String)
-    user_fk = relationship(User, lazy='subquery')
     skin_date = Column(DateTime)
+    user_fk = relationship(User, lazy='subquery')
 
 
 class SkinPhoto(Base):
@@ -62,4 +62,4 @@ class Comment(Base):
     comment_text = Column(String)
 
     user_fk = relationship(User, lazy='subquery')
-    post_fk = relationship(Skin, lazy='subquery')
+    skin_fk = relationship(Skin, lazy='subquery')
