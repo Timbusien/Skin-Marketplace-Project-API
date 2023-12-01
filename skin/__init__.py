@@ -2,6 +2,7 @@ from pydantic import BaseModel
 
 
 class AddSkin(BaseModel):
+    user_id: int
     skin_name: str
     flot: float
     cost_skin: int

@@ -1,7 +1,7 @@
 from skin import AddSkin, EditSkin
 from fastapi import APIRouter, UploadFile, Body
 from database.skinservice import (add_skin_my_db, edit_skin_my_db, add_skin_photo_my_db,
-                                  delete_skin_my_db, get_exact_skin, get_exact_user_skin_my_db, get_all_skins)
+                                  delete_skin_my_db, get_exact_skin_my_db, get_all_skins_my_db)
 
 skin_router = APIRouter(prefix='/skin', tags=['Skin Management'])
 
@@ -37,7 +37,7 @@ async def delete_skin(skin_id: int):
 
 @skin_router.get('/get-skin')
 async def get_exact_skin(skin_id: int):
-    result = get_exact_skin(skin_id)
+    result = get_exact_skin_my_db(skin_id)
 
     if result:
         return {'message': result}
@@ -45,19 +45,9 @@ async def get_exact_skin(skin_id: int):
         return {'message': 'Skin not Found'}
 
 
-@skin_router.get('/get-user-skin')
-async def get_exact_user_skin(user_id: int):
-    result = get_exact_user_skin_my_db(user_id)
-
-    if result:
-        return {'message': result}
-    else:
-        return {'message': 'No users Skin'}
-
-
 @skin_router.get('/get-all-skins')
 async def get_all_skins():
-    result = get_all_skins()
+    result = get_all_skins_my_db()
 
     return {'message': result}
 

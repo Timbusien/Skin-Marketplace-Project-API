@@ -54,4 +54,12 @@ class Trade(Base):
     trade_date = Column(DateTime)
 
 
+class Comment(Base):
+    __tablename__ = 'comments_skins'
+    comment_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.user_id'))
+    skin_id = Column(Integer, ForeignKey('skins.skin_id'))
+    comment_text = Column(String)
 
+    user_fk = relationship(User, lazy='subquery')
+    post_fk = relationship(Skin, lazy='subquery')
